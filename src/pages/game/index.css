@@ -1,0 +1,129 @@
+.app {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin:0 auto;
+}
+
+.top {
+  position: relative;
+  width: 100vw;
+  text-align: center;
+  height: 80px;
+  font-size: 32px;
+}
+
+.icon_back {
+  width: 20px;
+  height: 33px;
+  position: fixed;
+  left: 0;
+  padding: 30px;
+  z-index: 10;
+}
+.time {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  font-size: 70px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100px;
+  color: #1b1b1b;
+}
+.timeText{
+  color: #1b1b1b;
+}
+
+.num {
+  position: relative;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.checkpoint {
+  position: absolute;
+  right: 30px;
+  text-align: right;
+  color: #7d7d7d;
+  font-size: 28px;
+  display: inline-block;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  font-weight: 600;
+}
+
+.numImg,.numImgSele,.circleGree {
+  width: 18PX;
+  height: 18PX;
+  border-radius: 50%;
+  background: #ededef;
+  margin: 5PX 3PX;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.numImgSele {
+  background: #4ac44b;
+}
+
+.imgCon {
+  position: relative;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 0;
+  margin:0 auto;
+  padding-bottom: 20px;
+}
+.imgCon Image{
+  width: 100%;
+  height:100%;
+  border-radius: 15px;
+}
+.imgIcon {
+  position: absolute;
+  padding: 8px;
+}
+
+.imgSpanA,.imgSpanB,.imgSpanRed {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 7px solid #f48d00;
+  z-index: 1000;
+}
+
+.imgSpanB {
+  border: 7px solid #3fb441;
+}
+
+.imgSpanRed {
+  width: 30px;
+  height: 30px;
+  border: unset;
+  border-radius: unset;
+}
+
+.tipImg {
+  width: 194px;
+  height: 71px;
+  margin-left: calc((100% - 194px) / 2);
+  position: relative;
+  margin-top: 10px;
+}
+
+.errorTx {
+  position: absolute;
+  font-size: 32px;
+  color: red;
+}
+.timeText {
+  color: #1b1b1b;
+}

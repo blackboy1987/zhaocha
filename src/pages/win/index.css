@@ -1,0 +1,129 @@
+.app {
+  background: linear-gradient(#fbd3a4,#fdbbb3);
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 48px;
+}
+
+.top {
+  position: relative;
+  width: calc(100vw - 60px);
+  margin-left: 30px;
+  height: 120px;
+}
+
+.power,.coin {
+  position: relative;
+  width: 213px;
+  height: 72px;
+  line-height: 72px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  font-size: 0;
+}
+
+.coin {
+  width: 249px;
+}
+
+.powerImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.powerTxt {
+  display: inline-block;
+  position: relative;
+  width: 93%;
+  height: 60px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 60px;
+  color: #8bff77;
+  vertical-align: top;
+}
+
+.currTime {
+  position: relative;
+  width: 93%;
+  height: 45px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 45px;
+  color: #111;
+  display: block;
+  margin-top: -10px;
+}
+.main {
+  position: relative;
+  width: 100vw;
+  text-align: center;
+}
+.mainImgTitle {
+  position: relative;
+  width: 580px;
+  height: 160px;
+}
+.mainImg {
+  position: relative;
+  width: 370px;
+  height: 241px;
+  display: inline-block;
+  margin-top: 50px;
+}
+.duanTxt {
+  width: 203px;
+  height: 57px;
+  margin-top: 10px;
+}
+.info {
+  position: relative;
+  width: 100vw;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-weight: 600;
+}
+.startGame {
+  position: relative;
+  display: inline-block;
+  width: 382px;
+  height: 168px;
+  margin-top: 30px;
+}
+
+.btnhome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 60px;
+}
+
+.mainBack {
+  position: absolute;
+  width: 193px;
+  height: 42px;
+}
+
+.inviteBtn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 150px;
+}
+
+.inviteBtn Image {
+  width: 60px;
+  height: 60px;
+}

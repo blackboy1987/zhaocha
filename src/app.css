@@ -1,0 +1,10 @@
+page {
+  background: #fbd3a4;
+}
+Button{
+  display: inline-block;
+  padding: 0!important;
+  font-size: unset!important;
+  background: transparent!important;
+  overflow: unset!important;
+}

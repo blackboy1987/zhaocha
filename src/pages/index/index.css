@@ -1,0 +1,80 @@
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin:0 auto;
+}
+.top{
+  position: relative;
+  width: calc(100vw - 60px);
+  margin-left: 30px;
+  height: 70px;
+  padding-top: 48px;
+}
+.top .power{
+  position: relative;
+  width: 213px;
+  height: 72px;
+  line-height: 72px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  font-size: 0;
+}
+.top .powerTxt{
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 66px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 66px;
+  color: #8bff77;
+  vertical-align: top;
+}
+
+.top .power .currTime {
+  position: relative;
+  width: 93%;
+  height: 45px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 45px;
+  color: #111;
+  display: block;
+  margin-top: -10px;
+}
+.top .coin{
+  width: 249px;
+  position: relative;
+  height: 72px;
+  line-height: 72px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  font-size: 0;
+}
+.top .powerImg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.imgCon {
+  position: relative;
+  text-align: center;
+  margin: 0 15px 8px;
+  border-radius: 20px;
+  font-size: 0;
+}
+.imgCon Image{
+  width: 100%;
+  height:100%;
+  border-radius: 15px;
+}
