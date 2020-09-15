@@ -7,11 +7,12 @@ import Ad from '../components/Ad';
 import {SystemInfo} from "@/data";
 import request from "@/util/request";
 import animation from "@/util/animation";
-import { navigateTo } from 'remax/one';
+
 import {formatTime} from "@/util/utils";
+import {go} from "@/util/common";
 const imgWidth = 1602;
 const imgHeight = 1002;
-const innerAudioContext=wx.createInnerAudioContext()
+const innerAudioContext=wx.createInnerAudioContext();
 
 interface ImageData {
     x:number;
@@ -133,9 +134,7 @@ export default () => {
         console.log(newSelectCircles.length,imgs.length);
         // 找完所有的不同点
         if(newSelectCircles.length===imgs.length-1){
-            navigateTo({
-                url: '/pages/index/index',
-            });
+            go('/pages/index/index');
         }
 
     }
@@ -148,7 +147,7 @@ export default () => {
         <view className={styles.time}>
             <text className={styles.timeText} style={{color:'#1b1b1b'}}>{formatTime(remainSeconds)}</text>
         </view>
-        <Image className={styles.icon_back} src="/images/icon_back.png" />
+        <Image onTap={()=>go('/pages/index/index')} className={styles.icon_back} src="/images/icon_back.png" />
 
         <view className={styles.num}>
             {
@@ -204,13 +203,7 @@ export default () => {
             }
         </View>
         <Image className={styles.tipImg} src="/images/gameTip.png" />
-
-
-
-
-
         <Ad />
-
     </View>
   );
 };

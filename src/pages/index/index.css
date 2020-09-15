@@ -6,14 +6,15 @@
   box-sizing: border-box;
   margin:0 auto;
 }
-.top{
+.top {
   position: relative;
   width: calc(100vw - 60px);
   margin-left: 30px;
   height: 70px;
   padding-top: 48px;
 }
-.top .power{
+
+.power,.coin {
   position: relative;
   width: 213px;
   height: 72px;
@@ -24,19 +25,55 @@
   vertical-align: top;
   font-size: 0;
 }
-.top .powerTxt{
+
+.coin {
+  width: 249px;
+}
+
+.powerImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.selectImg {
+  height: 26px;
+  width: 26px;
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  margin-top: 27px;
+  position: relative;
+  margin-left: 10px;
+}
+
+.selectImg image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.powerTxt {
   display: inline-block;
   position: relative;
-  width: 100%;
-  height: 66px;
+  width: 93%;
+  height: 60px;
   text-align: center;
   font-size: 32px;
-  line-height: 66px;
+  line-height: 60px;
   color: #8bff77;
   vertical-align: top;
 }
 
-.top .power .currTime {
+.currTime {
   position: relative;
   width: 93%;
   height: 45px;
@@ -47,34 +84,604 @@
   display: block;
   margin-top: -10px;
 }
-.top .coin{
-  width: 249px;
+
+.main {
   position: relative;
-  height: 72px;
-  line-height: 72px;
-  box-sizing: border-box;
-  display: inline-block;
-  margin-right: 15px;
-  vertical-align: top;
-  font-size: 0;
+  width: 100vw;
+  height: 500px;
+  text-align: center;
 }
-.top .powerImg{
+
+.mainImg {
+  position: relative;
+  width: 370px;
+  height: 241px;
+  display: inline-block;
+  margin-top: 50px;
+  animation: moreGameIcon 3s infinite;
+}
+
+.duan {
+  width: 100vw;
+  height: 60px;
+  text-align: center;
+}
+
+.star {
+  width: 62px;
+  display: inline-block;
+  height: 60px;
+  margin: 0 10px;
+}
+
+.duanTxt {
+  width: 203px;
+  height: 57px;
+}
+
+.myDraw {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 78px;
+  height: 84px;
+}
+
+.notice {
   position: absolute;
   top: 0;
   left: 0;
+  width: 130px;
+  height: 80px;
+  background: rgba(0,0,0,0.4);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.info {
+  position: relative;
+  width: 100vw;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-weight: 600;
+}
+
+.noticeTxt {
+  display: inline-block;
+  vertical-align: top;
+  width: 60px;
+  font-size: 25px;
+  line-height: 30px;
+  margin-top: 10px;
+  color: rgba(255,255,255,0.8);
+  margin-left: 0;
+  position: relative;
+}
+
+.adImg {
+  position: absolute;
+  right: 30px;
+  height: 100px;
+  width: 100px;
+  border-radius: 15px;
+  top: 150px;
+}
+
+.startGame {
+  position: relative;
+  display: inline-block;
+  width: 382px;
+  height: 168px;
+  margin-top: 16px;
+}
+
+.btns {
+  box-sizing: border-box;
+  position: relative;
+  width: 100vw;
+  height: 120px;
+  margin: 20px 0;
+}
+
+.btnCon {
+  position: relative;
+  width: 102px;
+  height: 111px;
+  margin: 0 18px;
+  display: inline-block;
+}
+
+.btnImg {
   width: 100%;
   height: 100%;
 }
 
-.imgCon {
-  position: relative;
-  text-align: center;
-  margin: 0 15px 8px;
-  border-radius: 20px;
-  font-size: 0;
-}
-.imgCon Image{
+.getuser {
   width: 100%;
-  height:100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.toastImg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 570px;
+}
+
+.closeCon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.closeImg {
+  width: 80px;
+  height: 86px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.engTitle {
+  position: relative;
+  display: inline-block;
+  width: 246px;
+  height: 95px;
+  margin-top: 50px;
+}
+
+.eng {
+  position: relative;
+  display: block;
+  margin: 25px 0;
+  width: 120px;
+  height: 162px;
+  margin-left: calc((100% - 120px) / 2);
+}
+
+.gold {
+  position: relative;
+  display: block;
+  margin: 70px 0;
+  width: 120px;
+  height: 47px;
+  margin-left: calc((100% - 120px) / 2);
+}
+
+.engTxt {
+  position: relative;
+  margin-top: 15px;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 28px;
+  color: #0d0d0d;
+}
+
+.getTicket {
+  position: relative;
+  width: 173px;
+  height: 75px;
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.engChange {
+  width: 350px;
+  height: 350px;
+  margin-left: calc((100% - 350px) / 2);
+}
+
+.toMain {
+  position: relative;
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  margin-top: 20px;
+  height: 420px;
+}
+
+.ranklist {
+  position: relative;
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.toMainItem {
+  position: relative;
+  width: 100%;
+  height: 120px;
   border-radius: 15px;
+  border: 5px solid #000;
+  margin: 10px 0;
+  text-align: left;
+  background: #eee;
+  box-sizing: border-box;
+}
+
+.toMainFlex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemIcon {
+  width: 90px;
+  height: 90px;
+  margin-top: 15px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.itemTxt {
+  display: inline-block;
+  vertical-align: top;
+  height: 90px;
+  margin-top: 15px;
+  margin-left: 10px;
+  text-align: left;
+  font-size: 0;
+  overflow: hidden;
+  width: calc(100% - 234px);
+  margin-right: 10px;
+}
+
+.itemTxtRet {
+  margin-top: 0px;
+}
+
+.itemBtn {
+  width: 104px;
+  height: 51px;
+  margin-top: 34px;
+  position: relative;
+}
+
+.itemBtnRest {
+  margin-top: 0px;
+  margin-right: 10px;
+}
+
+.itemBtnCon {
+  width: 100%;
+  height: 100%;
+}
+
+.itemTxtTop,.itemTxtBottom {
+  display: block;
+  height: 40px;
+  line-height: 50px;
+  text-align: left;
+  font-size: 24px;
+  color: #2d2d2d;
+}
+
+.itemTxtCenter {
+  display: block;
+  height: 90px;
+  line-height: 90px;
+  text-align: left;
+  font-size: 28px;
+  color: #2d2d2d;
+}
+
+.uid {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #2d2d2d;
+}
+
+.getScratch {
+  width: 377px;
+  height: 161px;
+  position: relative;
+  margin: 60px 0;
+}
+
+.scratch {
+  width: 220px;
+  height: 78px;
+  position: relative;
+}
+
+.rankToast {
+  height: 900px;
+}
+
+.rankImg {
+  height: 770px;
+}
+
+.rankMain {
+  width: 100%;
+  height: 770px;
+  position: relative;
+}
+
+.rankItem,.rankRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rankItem text {
+  font-size: 26px;
+  color: #c76800;
+}
+
+.rankRow text {
+  margin-left: 10px;
+  font-size: 26px;
+  color: #333333;
+}
+
+.rankItem image {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.duanweiItem image {
+  width: 92px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.mjBanner {
+  position: absolute;
+  width: 600px;
+  margin-left: 75px;
+  bottom: 0px;
+  display: flex;
+}
+
+.mjBanner2 {
+  width: 600px;
+  margin-left: 75px;
+  margin-bottom: 20px;
+  bottom: 0px;
+  display: flex;
+}
+
+.more-game {
+  position: absolute;
+  left: 0;
+  top: 300px;
+}
+
+.more-game-img {
+  width: 119px;
+  height: 89px;
+  display: block;
+}
+
+.more-game-icon {
+  width: 96px;
+  height: 87px;
+  display: block;
+  position: absolute;
+  top: -30px;
+  left: 6px;
+}
+
+.more-game-text {
+  width: 103px;
+  height: 33px;
+  display: block;
+  position: absolute;
+  left: 3;
+  bottom: 14px;
+  z-index: 1;
+}
+
+@-webkit-keyframes moreGameIcon {
+  0% {
+    transform: rotate(0);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(-10deg);
+  }
+
+  30% {
+    transform: rotate(10deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes moreGameIcon {
+  0% {
+    transform: rotate(0);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(-10deg);
+  }
+
+  30% {
+    transform: rotate(10deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.game-input {
+  margin-top: 200px;
+}
+
+.user-exchange {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.exchange-view {
+  margin-left: 30px;
+  font-size: 30px;
+}
+
+.exchange-btn {
+  margin-right: 30px;
+  display: block;
+  width: 200px;
+  height: 70px;
+  line-height: 70px;
+}
+
+.exchange-sv {
+  margin-top: 10px;
+  height: 500px;
+}
+
+.exchangelist {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: crow;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.exchangelist view {
+  font-size: 25px;
+  line-height: 40px;
+}
+
+.joinGame {
+  display: block;
+  width: 300px;
+  margin-top: 200px;
+}
+
+.leftMoreGame {
+  position: absolute;
+  top: 450px;
+  left: 10px;
+}
+
+.leftImage,.rightImage {
+  margin-top: 20px;
+}
+
+.leftMoreGame image,.rightImage image {
+  width: 120px;
+  height: 120px;
+}
+
+.rightMoreGame {
+  position: absolute;
+  top: 450px;
+  right: 10px;
+}
+
+.rewards {
+  position: absolute;
+  top: 230px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rewards image {
+  width: 150px;
+  height: 100px;
+}
+
+.rewards view {
+  color: #FFF;
+  font-size: 27px;
+  -webkit-text-stroke: 1px red;
+}
+
+.show-container {
+  background: #f6f6f6;
+}
+
+.show-ad {
+  width: 100%;
+  display: flex;
+}
+
+.show-ad image {
+  float: left;
+  width: 100%;
+}
+
+.form_div {
+  width: 100%;
+}
+
+.form_div view {
+  width: 92%;
+  margin: 25px auto;
+  height: 80px;
+  line-height: 80px;
+  background: #f8f8f8;
+}
+
+.pclass {
+  color: #808080;
+}
+
+.form_div view input {
+  height: 80px;
+  line-height: 80px;
+  margin-left: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.fb-btn {
+  margin-left: 275px;
+  width: 200px;
+  border-radius: 0px;
+  margin-top: 25px;
 }

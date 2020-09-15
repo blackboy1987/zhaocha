@@ -1,0 +1,91 @@
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+}
+
+.toastBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 520px;
+    height: 700px;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.toastImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 570px;
+}
+.engTitle {
+    position: relative;
+    display: inline-block;
+    width: 246px;
+    height: 95px;
+    margin-top: 50px;
+}
+.eng {
+    position: relative;
+    display: block;
+    margin: 25px 0;
+    width: 120px;
+    height: 162px;
+    margin-left: calc((100% - 120px) / 2);
+}
+.engTxt {
+    position: relative;
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 28px;
+    color: #0d0d0d;
+}
+.getTicket {
+    position: relative;
+    width: 173px;
+    height: 75px;
+    display: inline-block;
+    margin-top: 30px;
+}
+.closeCon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.closeImg {
+    width: 80px;
+    height: 86px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+
+
+
+
+
+

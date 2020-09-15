@@ -1,0 +1,96 @@
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+}
+
+.toastBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 520px;
+    height: 700px;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.toastImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 570px;
+}
+.engTitle {
+    position: relative;
+    display: inline-block;
+    width: 246px;
+    height: 95px;
+    margin-top: 50px;
+}
+.closeCon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.closeImg {
+    width: 80px;
+    height: 86px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+.rankToast {
+    height: 900px;
+}
+.rankImg {
+    height: 770px;
+}
+
+.ranklist {
+    position: relative;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.rankItem,.rankRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.rankItem Text {
+    font-size: 26px;
+    color: #c76800;
+}
+
+.rankRow Text {
+    margin-left: 10px;
+    font-size: 26px;
+    color: #333333;
+}
+
+.rankItem Image {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
