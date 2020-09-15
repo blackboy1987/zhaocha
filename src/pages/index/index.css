@@ -623,19 +623,19 @@
 
 .rewards {
   position: absolute;
-  top: 230px;
+  top: 115px;
   right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.rewards image {
+.rewards Image {
   width: 150px;
   height: 100px;
 }
 
-.rewards view {
+.rewards View {
   color: #FFF;
   font-size: 27px;
   -webkit-text-stroke: 1px red;

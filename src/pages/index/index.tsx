@@ -100,6 +100,10 @@ export default () => {
         setSettingModalVisible(true);
     }
 
+    const goRewards=()=>{
+
+    }
+
   return (
     <View className={styles.app} style={{background:'#fbd3a4'}}>
       <View className={styles.top}>
@@ -161,8 +165,8 @@ export default () => {
             <Ad />
 
             <View onTap={goRewards} className={styles.rewards}>
-                <Image src="{{config.rewards.img}}" />
-                <view>{{money}}{{config.rewards.unit}}</view>
+                <Image src="https://bbs.zhuchenkeji.shop/attachment/images/51/2020/09/s1DD3FW1W3tjbBZzDBWbK77fgbTss3.jpg" />
+                <View>1元</View>
             </View>
         </View>
         {
