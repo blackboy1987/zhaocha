@@ -1,0 +1,118 @@
+.app {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin:0 auto;
+}
+
+.top {
+  position: relative;
+  width: calc(100vw - 60px);
+  margin-left: 30px;
+  height: 130px;
+  margin-top:48px;
+}
+
+.power,.coin {
+  position: relative;
+  width: 213px;
+  height: 72px;
+  line-height: 72px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  font-size: 0;
+}
+
+.coin {
+  width: 249px;
+}
+
+.powerImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.powerTxt {
+  display: inline-block;
+  position: relative;
+  width: 93%;
+  height: 60px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 60px;
+  color: #8bff77;
+  vertical-align: top;
+}
+.currTime {
+  position: relative;
+  width: 93%;
+  height: 45px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 45px;
+  color: #111;
+  display: block;
+  margin-top: -10px;
+}
+.timeTitle {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 600;
+  color: #111;
+}
+.main {
+  position: relative;
+  width: 100vw;
+  text-align: center;
+}
+.mainImg {
+  position: relative;
+  width: 420px;
+  height: 352px;
+  display: inline-block;
+  margin-top: 50px;
+}
+.startGame {
+  position: relative;
+  display: inline-block;
+  width: 382px;
+  height: 168px;
+  margin-top: 30px;
+}
+.reset {
+  position: relative;
+  height: 131px;
+  width: 382px;
+  margin-top: 20px;
+}
+.btnhome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 60px;
+}
+.mainBack {
+  position: absolute;
+  width: 193px;
+  height: 42px;
+}
+
+.invite {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 150px;
+  width: 60px;
+  height: 60px;
+}
+
+

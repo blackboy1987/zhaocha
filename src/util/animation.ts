@@ -1,14 +1,16 @@
-const animation = (from:{x:number,y:number},to:{x:number,y:number},time:number,callback:(animation:any)=>void)=>{
-    const animation = wx.createAnimation({
-        duration: 1000,
-        timingFunction: 'ease',
+export const moveTo=({x,y,z}:{x:number,y:number,z:number})=>{
+    let animation = wx.createAnimation({
+        duration:5000,
+        timingFunction:'linear',
+        delay:1000,
     });
-    animation.opacity(1).translate(to.x-from.x,to.y-from.y).rotate(45).step();
-    callback(animation.export());
-    setTimeout(function() {
-        animation.step()
-        callback(animation.export());
-    }, 1000)
+    animation.translateX(x).translateY(y).translateZ(z).step();
+    return animation.export();
 }
 
-export default animation;
+
+export const resetAnimation=(animationObj:any)=>{
+    console.log("huanyangzhuagntai");
+    animationObj.opacity(1).rotate(0, 0).scale(1).translate(0, 0).skew(0, 0).step({ duration: 0 });
+    return animationObj.export();
+}

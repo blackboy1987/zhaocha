@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, Text, Image,Button } from 'remax/one';
-import Ad from '../components/Ad';
 import {usePageEvent} from 'remax/macro';
 import styles from './index.css';
 import {formatTime} from "@/util/utils";
+import BannerAd from "../components/Ad/BannerAd";
 
 export default () => {
 
@@ -54,7 +54,7 @@ export default () => {
 
 
 
-        <Ad />
+        <BannerAd />
     </View>
   );
 };

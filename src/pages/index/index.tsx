@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { View, Text,} from 'remax/one';
+import {Text,View,} from 'remax/one';
 import {Button,Image} from 'remax/wechat';
 import styles from './index.css';
-import {usePageEvent} from 'remax/macro';
 import request from "@/util/request";
 import {Constants} from "@/util/constants";
 import {useState} from "react";
 import {btnSoundTrue, go} from "@/util/common";
-import { navigateTo } from 'remax/one';
 import {useNativeEffect} from 'remax';
-import Ad from '../components/Ad';
+import {usePageEvent} from 'remax/macro';
 import TiLiModal from "@/pages/components/tiliModal";
 import {formatTime} from "@/util/utils";
 import RankModal, {RankData} from "@/pages/components/RankModal";
 import SettingModal from "@/pages/components/SettingModal";
 import GiftModal from "@/pages/components/GiftModal";
+import BannerAd from "../components/Ad/BannerAd";
+import {moveTo} from "@/util/animation";
 
 
 export default () => {
@@ -23,9 +23,10 @@ export default () => {
     const [tiLiModalVisible, setTiLiModalVisible] = useState<boolean>(false);
     const [rankModalVisible, setRankModalVisible] = useState<boolean>(false);
     const [giftModalVisible, setGiftModalVisible] = useState<boolean>(false);
-    const [settingModalVisible, setSettingModalVisible] = useState<boolean>(true);
+    const [settingModalVisible, setSettingModalVisible] = useState<boolean>(false);
     const [rankData, setRankData] = useState<RankData[]>([]);
     const [countDownTime,setCountDownTime] = useState<number>(100);
+    const [animation,setAnimation] = useState<any>(null);
 
     useNativeEffect(() => {
         setIsAuth(wx.getStorageSync("isAuth"));
@@ -100,6 +101,20 @@ export default () => {
         setSettingModalVisible(true);
     }
 
+    const goRewards=()=>{
+
+    }
+
+    const animation2=()=>{
+        console.log("start");
+        let animation1 = wx.createAnimation({
+            duration:5000,
+            timingFunction:'linear',
+            delay:1000,
+        });
+        animation.rotate(60).step();
+        setAnimation(animation1.export);
+    }
   return (
     <View className={styles.app} style={{background:'#fbd3a4'}}>
       <View className={styles.top}>
@@ -127,7 +142,7 @@ export default () => {
                     </Button>
                 ) : (
                     <Button onGetUserInfo={wxUserInfo} openType="getUserInfo">
-                        <Image className={styles.startGame} src={Constants.resourceUrl+'images/startGame.png'} />
+                        <Image onClick={()=>go("/pages/game/index")} className={styles.startGame} src={Constants.resourceUrl+'images/startGame.png'} />
                     </Button>
                 )
             }
@@ -158,12 +173,11 @@ export default () => {
                     <Image className={styles.btnImg} src={Constants.resourceUrl+'images/people.png'} />
                 </Button>
             </View>
-            <Ad />
-
             <View onTap={goRewards} className={styles.rewards}>
-                <Image src="{{config.rewards.img}}" />
-                <view>{{money}}{{config.rewards.unit}}</view>
+                <Image src="https://bbs.zhuchenkeji.shop/attachment/images/51/2020/09/s1DD3FW1W3tjbBZzDBWbK77fgbTss3.jpg" />
+                <view>1元</view>
             </View>
+            <BannerAd />
         </View>
         {
             tiLiModalVisible ? ( <TiLiModal visible={tiLiModalVisible} close={()=>setTiLiModalVisible(false)} countDownTime={countDownTime} />) : null

@@ -1,0 +1,7 @@
+.adContainer{
+    position: fixed;
+    bottom: 0;
+    width: 690px;
+    margin-left:30px;
+    display: flex;
+}

@@ -22,6 +22,12 @@ const App: React.FC = props => {
     wx.checkSession({
         success:()=>{
 
+            /*wx.getUserInfo({
+                success:result => {
+                    console.log("userInfo",result);
+                }
+            })*/
+
         },
         fail:()=>{
             wx.login({
@@ -35,12 +41,6 @@ const App: React.FC = props => {
                     })
                 }
             });
-        }
-    })
-
-    wx.getUserInfo({
-        success:result => {
-            console.log("userInfo",result);
         }
     })
 

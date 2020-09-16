@@ -2,17 +2,20 @@ import * as React from 'react';
 import { View, Text, Image } from 'remax/one';
 import {usePageEvent} from 'remax/macro';
 import styles from './index.css';
-import {useEffect, useState} from "react";
-import Ad from '../components/Ad';
+import {useState} from "react";
+import {useNativeEffect} from 'remax';
 import {SystemInfo} from "@/data";
 import request from "@/util/request";
-import animation from "@/util/animation";
 
 import {formatTime} from "@/util/utils";
 import {go} from "@/util/common";
+import BannerAd from "../components/Ad/BannerAd";
+import {resetAnimation} from "@/util/animation";
 const imgWidth = 1602;
 const imgHeight = 1002;
 const innerAudioContext=wx.createInnerAudioContext();
+let animationObj:any;
+let timer;
 
 interface ImageData {
     x:number;
@@ -27,22 +30,31 @@ interface SelectCircle {
     x:number;
     y:number;
     opacity?:number;
+    errorFontSize?:number;
+    errorFontColor?:string;
 }
 
 export default () => {
     const [width,setWidth] = useState<number>(0);
     const [level,setLevel] = useState<number>(0);
-    const [remainSeconds,setRemainSeconds] = useState(10);
+    const [remainSeconds,setRemainSeconds] = useState(100);
     const [height,setHeight] = useState<number>(0);
-    const [scale,setScale] = useState<number>(1);
     const [imgs,setImgs] = useState<ImageData[]>([]);
     const [selectCircles,setSelectCircles] = useState<SelectCircle[]>([]);
     const [errorCircle,setErrorCircle] = useState<SelectCircle>({
         x:-200,
         y:-200,
         opacity:0,
+        errorFontSize:70,
+        errorFontColor:'#1b1b1b',
     });
     const [errorCircleAnimation,setErrorCircleAnimation] = useState(null);
+
+    useNativeEffect(()=>{
+        animationObj = wx.createAnimation({
+            duration:2000,
+        });
+    });
 
     usePageEvent("onLoad",()=>{
         wx.getSystemInfo({
@@ -53,7 +65,7 @@ export default () => {
                 setWidth(width1);
                 setHeight(height1);
                 console.log(scale1);
-                request("http://blackboy1987.eicp.net/level",(data)=>{
+                request("level?id=37",(data)=>{
                     const {value,question=[]} = data.data;
                     setLevel(value);
                     setImgs(question.map((item:ImageData,index:number)=>{
@@ -68,13 +80,18 @@ export default () => {
                             y:Math.abs(item.y*scale1-item.height*scale1/2),
                         }
                     }));
+                    setRemainSeconds(100);
                 });
             }
         });
         countDown(remainSeconds);
     });
     const countDown=(seconds:number)=>{
+        clearInterval(timer);
+        // 倒计时变为0。跳转到失败页面
         if(seconds<=0){
+            setRemainSeconds(0);
+            go("/pages/fail/index");
             return ;
         }
         if(seconds<=6){
@@ -85,27 +102,48 @@ export default () => {
 
         }
         setRemainSeconds(seconds-1);
-        let timer = setInterval(()=>{
+        timer = setInterval(()=>{
             countDown(seconds-1);
-            clearInterval(timer);
         },1000);
     }
 
+    /**
+     * 点击的错误地区
+     * @param item
+     * @param e
+     */
     const getError=(item:ImageData,e:any)=>{
+        countDown(remainSeconds-20);
         const errorX = e.nativeEvent.detail.x-30;
-        const errorY = e.nativeEvent.detail.y-30-30-30-30;
+        const errorY = e.nativeEvent.detail.y-120;
         setErrorCircle({
             x:errorX,
             y:errorY,
             opacity:1,
+            errorFontSize:90,
+            errorFontColor:'red'
         });
-
-        animation({x:errorX,y:errorY},{x:50,y:50},10000,(currentPosition)=>{
-            setErrorCircleAnimation(currentPosition);
-        });
-
-       // wx.vibrateShort();
+        setErrorCircleAnimation(resetAnimation(animationObj));
+        setTimeout(()=>{
+            animationObj.opacity(0).translate(-e.nativeEvent.detail.x*2+175*2, -e.nativeEvent.detail.y+7).scale(2).step()
+            setErrorCircleAnimation(animationObj.export());
+            setErrorCircle({
+                x:errorX,
+                y:errorY,
+                opacity:1,
+                errorFontSize:70,
+                errorFontColor:'#1b1b1b',
+            });
+        },10);
+        // 手机震动效果
+       wx.vibrateShort();
     }
+
+    /**
+     * 点击的是正确区域
+     * @param item
+     * @param e
+     */
     const noneClick=(item:ImageData,e:any)=>{
         if(item.check){
             return;
@@ -145,7 +183,7 @@ export default () => {
             <Image className={styles.icon_back} src="/images/icon_back.png" />
         </view>
         <view className={styles.time}>
-            <text className={styles.timeText} style={{color:'#1b1b1b'}}>{formatTime(remainSeconds)}</text>
+            <Text className={styles.timeText} style={{color:errorCircle.errorFontColor,fontSize:errorCircle.errorFontSize,}}>{formatTime(remainSeconds)}</Text>
         </view>
         <Image onTap={()=>go('/pages/index/index')} className={styles.icon_back} src="/images/icon_back.png" />
 
@@ -179,10 +217,10 @@ export default () => {
               ))
           }
           <Image className={styles.imgSpanRed} src="/images/errorClick.png" style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`,width:60,height:60,opacity:errorCircle.opacity}} />
-          <View animation={errorCircleAnimation} className={styles.errorTx} style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`}}>-20</View>
+          <View animation={errorCircleAnimation} className={styles.errorTx} style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`,opacity:errorCircle.opacity}}>-20</View>
       </View>
 
-        <View className={styles.imgCon} style={{width:`${width}PX`,height:`${height}PX`}}>
+        <View className={styles.imgCon} style={{width:`${width}PX`,height:`${height}PX`,display:'none'}}>
             {
                 imgs.map((item:ImageData,index:number)=>(
                     <>
@@ -203,7 +241,7 @@ export default () => {
             }
         </View>
         <Image className={styles.tipImg} src="/images/gameTip.png" />
-        <Ad />
+        <BannerAd />
     </View>
   );
 };

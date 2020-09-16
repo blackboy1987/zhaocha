@@ -1,6 +1,8 @@
 const pages = [
-    'pages/index/index',
     'pages/game/index',
+    'pages/animation/index',
+    'pages/index/index',
+    'pages/fail/index',
     'pages/win/index'
 ];
 const color = '#282c34';

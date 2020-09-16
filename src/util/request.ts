@@ -19,6 +19,7 @@ const request = (url:string,callback:(data:any)=>void,options?:any)=>{
     }
     const method = options.method || 'GET';
     const data = options.data || {};
+    console.log("Constants.baseUrl+url",Constants.baseUrl+url);
     wx.request({
         url: Constants.baseUrl+url,
         method,

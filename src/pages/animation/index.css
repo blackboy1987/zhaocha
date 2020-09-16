@@ -1,0 +1,11 @@
+.app {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin:0 auto;
+}
+
+.animation{
+  margin-top:300px;
+}
