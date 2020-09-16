@@ -20,24 +20,21 @@ const App: React.FC = props => {
 
 
     wx.checkSession({
-        success:()=>{
-
-            /*wx.getUserInfo({
-                success:result => {
-                    console.log("userInfo",result);
-                }
-            })*/
+        success:(res)=>{
+            console.log(res);
 
         },
         fail:()=>{
             wx.login({
                 success:result=>{
                     request("login?code="+result.code,(data)=>{
-                        console.log(data,"abc");
-                        wx.setStorage({
-                            key:"userToken",
-                            data:data.data.token,
-                        })
+                        if(data.data.token){
+                            wx.setStorage({
+                                key:"userToken",
+                                data:data.data.token,
+                            })
+                        }
+
                     })
                 }
             });

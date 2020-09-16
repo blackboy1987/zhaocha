@@ -105,16 +105,6 @@ export default () => {
 
     }
 
-    const animation2=()=>{
-        console.log("start");
-        let animation1 = wx.createAnimation({
-            duration:5000,
-            timingFunction:'linear',
-            delay:1000,
-        });
-        animation.rotate(60).step();
-        setAnimation(animation1.export);
-    }
   return (
     <View className={styles.app} style={{background:'#fbd3a4'}}>
       <View className={styles.top}>

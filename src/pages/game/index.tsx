@@ -189,7 +189,7 @@ export default () => {
 
         <view className={styles.num}>
             {
-                imgs.map((img,index)=>(index>0&&<Image
+                imgs.map((img,index)=>(index>0&&<Image key={index}
                         className={index<=selectCircles.length?styles.numImgSele:styles.numImg}
                         src={index<=selectCircles.length?"/images/b.png":"/images/a.png"}
                     />))
@@ -220,7 +220,7 @@ export default () => {
           <View animation={errorCircleAnimation} className={styles.errorTx} style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`,opacity:errorCircle.opacity}}>-20</View>
       </View>
 
-        <View className={styles.imgCon} style={{width:`${width}PX`,height:`${height}PX`,display:'none'}}>
+        <View className={styles.imgCon} style={{width:`${width}PX`,height:`${height}PX`}}>
             {
                 imgs.map((item:ImageData,index:number)=>(
                     <>
