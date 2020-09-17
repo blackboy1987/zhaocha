@@ -1,7 +1,7 @@
 const pages = [
+    'pages/index/index',
     'pages/game/index',
     'pages/animation/index',
-    'pages/index/index',
     'pages/fail/index',
     'pages/win/index'
 ];
@@ -16,7 +16,7 @@ export const wechat: WechatAppConfig = {
   pages,
   window: {
     navigationBarBackgroundColor: color,
-    navigationBarTitleText: 'Remax One Wechat',
+    navigationBarTitleText: '黎哥爱找茬',
     navigationStyle:'custom'
   },
 };

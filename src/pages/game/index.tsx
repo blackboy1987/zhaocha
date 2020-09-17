@@ -6,10 +6,11 @@ import {useState} from "react";
 import {useNativeEffect} from 'remax';
 import {SystemInfo} from "@/data";
 import request from "@/util/request";
+import classNames from 'classnames';
 
 import {formatTime} from "@/util/utils";
 import {go} from "@/util/common";
-import BannerAd from "../components/Ad/BannerAd";
+
 import {resetAnimation} from "@/util/animation";
 const imgWidth = 1602;
 const imgHeight = 1002;
@@ -34,6 +35,14 @@ interface SelectCircle {
     errorFontColor?:string;
 }
 
+interface TipsCircle{
+    x:number;
+    y:number;
+    opacity?:number;
+    img?:ImageData;
+}
+
+
 export default () => {
     const [width,setWidth] = useState<number>(0);
     const [level,setLevel] = useState<number>(0);
@@ -41,6 +50,14 @@ export default () => {
     const [height,setHeight] = useState<number>(0);
     const [imgs,setImgs] = useState<ImageData[]>([]);
     const [selectCircles,setSelectCircles] = useState<SelectCircle[]>([]);
+    const [userInfo,setUserInfo] = useState({});
+    const [tipsStatus,setTipStatus] = useState<number>(0);
+    const [tipsCircle,setTipsCircle] = useState<TipsCircle>({
+        x:0,
+        y:0,
+        opacity:0,
+    });
+
     const [errorCircle,setErrorCircle] = useState<SelectCircle>({
         x:-200,
         y:-200,
@@ -54,6 +71,9 @@ export default () => {
         animationObj = wx.createAnimation({
             duration:2000,
         });
+        setUserInfo({
+            gold:100,
+        })
     });
 
     usePageEvent("onLoad",()=>{
@@ -64,9 +84,8 @@ export default () => {
                 const height1 = imgHeight*scale1;
                 setWidth(width1);
                 setHeight(height1);
-                console.log(scale1);
                 request("level?id=37",(data)=>{
-                    const {value,question=[]} = data.data;
+                    const {value,question=[]} = data;
                     setLevel(value);
                     setImgs(question.map((item:ImageData,index:number)=>{
                         if(index===0){
@@ -145,6 +164,12 @@ export default () => {
      * @param e
      */
     const noneClick=(item:ImageData,e:any)=>{
+        setTipsCircle({
+            x:0,
+            y:0,
+            opacity:0,
+        })
+
         if(item.check){
             return;
         }
@@ -169,12 +194,51 @@ export default () => {
             }
             return img
         }));
-        console.log(newSelectCircles.length,imgs.length);
         // 找完所有的不同点
         if(newSelectCircles.length===imgs.length-1){
             go('/pages/index/index');
         }
 
+    }
+
+    const getTip=()=>{
+        if(tipsStatus!=0){
+            wx.showToast({
+                title: "请勿频繁使用提示功能",
+                icon: "none"
+            })
+            return ;
+        }
+        setTipStatus(1);
+        if(10<userInfo.gold){
+            wx.showToast({
+                title: "金币ok",
+                icon: "none"
+            })
+            getNextTip();
+        }else{
+            wx.showToast({
+                title: "金币不足",
+                icon: "none"
+            })
+        }
+    }
+
+    const getNextTip=()=>{
+        // 过滤出未选出来的点
+        const imgs1 = imgs.filter((item,index)=>index!==0&&!item.check);
+        if(imgs1.length===0){
+            // 已查找完，跳转到成功页面
+        }else{
+            const currentImg = imgs1[0];
+            setTipsCircle({
+                x:currentImg.x + currentImg.width / 2 - 10,
+                y: currentImg.y + currentImg.height / 2 - 10,
+                opacity:1,
+                img:currentImg,
+            })
+        }
+        setTipStatus(0);
     }
 
   return (
@@ -218,6 +282,14 @@ export default () => {
           }
           <Image className={styles.imgSpanRed} src="/images/errorClick.png" style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`,width:60,height:60,opacity:errorCircle.opacity}} />
           <View animation={errorCircleAnimation} className={styles.errorTx} style={{left:`${errorCircle.x}PX`,top:`${errorCircle.y}PX`,opacity:errorCircle.opacity}}>-20</View>
+
+          <Image
+              onTap={(e)=>tipsCircle.img&&noneClick(tipsCircle.img,e)}
+              className={classNames(styles.tipImgsd,styles.tipImgsdChan)}
+              src="/images/tip.png"
+              style={{width:60,height:60,left:`${tipsCircle.x}PX`,top:`${tipsCircle.y}PX`,opacity:tipsCircle.opacity}}
+          />
+
       </View>
 
         <View className={styles.imgCon} style={{width:`${width}PX`,height:`${height}PX`}}>
@@ -240,8 +312,7 @@ export default () => {
                 ))
             }
         </View>
-        <Image className={styles.tipImg} src="/images/gameTip.png" />
-        <BannerAd />
+        <Image onTap={getTip} className={styles.tipImg} src="/images/gameTip.png" />
     </View>
   );
 };

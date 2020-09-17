@@ -14,7 +14,9 @@ import RankModal, {RankData} from "@/pages/components/RankModal";
 import SettingModal from "@/pages/components/SettingModal";
 import GiftModal from "@/pages/components/GiftModal";
 import BannerAd from "../components/Ad/BannerAd";
-import {moveTo} from "@/util/animation";
+import {getStorage, login, setStorage} from "@/util/wxUtils";
+import {RankInfo} from "@/data";
+import {defaultRankInfo} from "@/initData";
 
 
 export default () => {
@@ -27,6 +29,7 @@ export default () => {
     const [rankData, setRankData] = useState<RankData[]>([]);
     const [countDownTime,setCountDownTime] = useState<number>(100);
     const [animation,setAnimation] = useState<any>(null);
+    const [rankInfo,setRankInfo] = useState<RankInfo>(defaultRankInfo);
 
     useNativeEffect(() => {
         setIsAuth(wx.getStorageSync("isAuth"));
@@ -43,15 +46,13 @@ export default () => {
     }
 
 
-    usePageEvent("onLoad",()=>{
-       console.log("index", wx.getStorageSync('siteInfo'));
-       // 获取用户基本信息
-        request("user/info",(data => {
-            console.log("user/info",data);
-        }),{
-            data:{
-                userToken:wx.getStorageSync("userToken")
-            }
+    usePageEvent("onLoad",(e)=>{
+       // 调用登录接口获取用户信息
+        login();
+        // 获取用户等级信息
+        request("user/level?userToken="+getStorage("userToken"),(data)=>{
+            setRankInfo(getStorage("rankInfo"));
+            setStorage("rankInfo",data);
         })
     });
 
@@ -59,7 +60,15 @@ export default () => {
         const a = e.detail.errMsg;
         if ("getUserInfo:ok" == a) {
             const userInfo = e.detail.userInfo;
-            wx.setStorageSync("isAuth",true);
+            // 授权成功之后，将信息写入到数据库里面去。
+            request("user/update",()=>{},{
+                data:{
+                    userToken:wx.getStorageSync("userToken"),
+                    ...userInfo
+                }
+            })
+
+            setStorage("isAuth",true);
             setIsAuth(true);
             wx.showToast({
                 title: "授权成功，请继续游戏",
@@ -104,7 +113,6 @@ export default () => {
     const goRewards=()=>{
 
     }
-
   return (
     <View className={styles.app} style={{background:'#fbd3a4'}}>
       <View className={styles.top}>
@@ -121,10 +129,10 @@ export default () => {
           </View>
       </View>
         <View className={styles.main}>
-            <Image className={styles.mainImg} src={Constants.resourceUrl+'images/rank/rank6.png'} />
+            <Image className={styles.mainImg} src={rankInfo.rankImg} />
             <View />
-            <Image className={styles.duanTxt} src={Constants.resourceUrl+'images/rank/rank6_1.png'} />
-            <view className={styles.info}>还差56关晋级优秀黄铜</view>
+            <Image className={styles.duanTxt} src={rankInfo.rankNameImg} />
+            <view className={styles.info}>{rankInfo.willTitle}</view>
             {
                 isAuth ? (
                     <Button onClick={toGame}>
@@ -164,7 +172,7 @@ export default () => {
                 </Button>
             </View>
             <View onTap={goRewards} className={styles.rewards}>
-                <Image src="https://bbs.zhuchenkeji.shop/attachment/images/51/2020/09/s1DD3FW1W3tjbBZzDBWbK77fgbTss3.jpg" />
+                <Image src={`${Constants.resourceUrl}images/s1DD3FW1W3tjbBZzDBWbK77fgbTss3.jpg`} />
                 <view>1元</view>
             </View>
             <BannerAd />

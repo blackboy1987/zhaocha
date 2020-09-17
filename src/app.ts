@@ -2,45 +2,23 @@ import * as React from 'react';
 import './app.css';
 import request from "@/util/request";
 import {useAppEvent } from "remax/macro";
+import {getStorage, setStorage} from "@/util/wxUtils";
 
 const App: React.FC = props => {
 
     useAppEvent("onLaunch",()=>{
+        // 获取网站基本信息
         request("site",(data)=>{
             wx.setStorage({
                 key:"siteInfo",
-                data:data.data.siteInfo
+                data:data.siteInfo
             });
             wx.setStorage({
                 key:"rankList",
-                data:data.data.rankList
+                data:data.rankList
             });
-        })
+        });
     });
-
-
-    wx.checkSession({
-        success:(res)=>{
-            console.log(res);
-
-        },
-        fail:()=>{
-            wx.login({
-                success:result=>{
-                    request("login?code="+result.code,(data)=>{
-                        if(data.data.token){
-                            wx.setStorage({
-                                key:"userToken",
-                                data:data.data.token,
-                            })
-                        }
-
-                    })
-                }
-            });
-        }
-    })
-
 
     return props.children as React.ReactElement;
 };

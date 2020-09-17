@@ -1,4 +1,5 @@
 import {Constants} from "@/util/constants";
+import {getStorage} from "@/util/wxUtils";
 
 export interface RequestOption{
     method?:
@@ -19,22 +20,21 @@ const request = (url:string,callback:(data:any)=>void,options?:any)=>{
     }
     const method = options.method || 'GET';
     const data = options.data || {};
-    const userToken = wx.getStorageSync("userToken");
-    console.log("Constants.baseUrl+url",Constants.baseUrl+url);
+    const userToken = getStorage("userToken");
     wx.request({
         url: Constants.baseUrl+url,
         method,
         data:{
-            ...data,
             appCode:Constants.code,
             appSecret:Constants.secret,
             userToken,
+            ...data,
         },
         success (res) {
             const {statusCode} = res;
             console.log(statusCode);
             if(statusCode>=200&&statusCode<=299){
-                callback(res.data);
+                callback(res.data.data);
             }else {
                 wx.showToast({
                     title:res.data.data.msg,
