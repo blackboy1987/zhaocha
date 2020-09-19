@@ -2,7 +2,7 @@ import * as React from 'react';
 import './app.css';
 import request from "@/util/request";
 import {useAppEvent } from "remax/macro";
-import {getStorage, setStorage} from "@/util/wxUtils";
+import {getStorage, setStorage, wxGetSystemInfo} from "@/util/wxUtils";
 
 const App: React.FC = props => {
 
@@ -18,6 +18,8 @@ const App: React.FC = props => {
                 data:data.rankList
             });
         });
+
+        wxGetSystemInfo();
     });
 
     return props.children as React.ReactElement;

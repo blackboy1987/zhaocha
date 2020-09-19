@@ -29,3 +29,23 @@ export const copy=(data:any,callback?:()=>void)=>{
         }
     });
 }
+
+let timer;
+
+export const countDown=(residueTime:number,callback:(residueTime:number)=>void)=>{
+    if(residueTime<=0){
+        if(callback){
+            callback(0);
+        }
+    }else{
+        let residueTime1 = residueTime-1;
+        timer = setInterval(()=>{
+            callback(residueTime1);
+            countDown(residueTime1,callback);
+            clearInterval(timer);
+        },1000);
+    }
+
+
+
+}

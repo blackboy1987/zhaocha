@@ -9,7 +9,7 @@ export interface RankItem{
 }
 
 export interface SiteInfo {
-    ticket_max:number;
+    ticketMax:number;
     ticket_time:number;
     is_share:number;
     game_time:number;
@@ -36,12 +36,12 @@ export interface SiteInfo {
     hook:number;
     color1:string;
     color2:string;
-    rewards:{
+    reward:{
         open:number;
         unit:string;
         max_unit:number;
         img:string;
-        mgs:string;
+        msg:string;
     };
     yf_show:number;
     yf_show_image:string;
@@ -53,5 +53,12 @@ export interface RankInfo{
     rankName: string;
     rank: number;
     rankImg: string;
-    willTitle: string
+    willTitle: string;
+    residueTime:number;
+}
+
+export interface UserInfo{
+    money:number;
+    nickName:string;
+    ticket:number;
 }

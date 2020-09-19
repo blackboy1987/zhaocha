@@ -9,9 +9,10 @@ import request from "@/util/request";
 import classNames from 'classnames';
 
 import {formatTime} from "@/util/utils";
-import {go} from "@/util/common";
+import {btnSoundTrue, go} from "@/util/common";
 
 import {resetAnimation} from "@/util/animation";
+import {getStorage, wxGetSystemInfo} from "@/util/wxUtils";
 const imgWidth = 1602;
 const imgHeight = 1002;
 const innerAudioContext=wx.createInnerAudioContext();
@@ -67,42 +68,45 @@ export default () => {
     });
     const [errorCircleAnimation,setErrorCircleAnimation] = useState(null);
 
-    useNativeEffect(()=>{
+    usePageEvent("onShow",()=>{
+
         animationObj = wx.createAnimation({
             duration:2000,
         });
-        setUserInfo({
-            gold:100,
-        })
-    });
+        setUserInfo(getStorage("userInfo"));
 
-    usePageEvent("onLoad",()=>{
-        wx.getSystemInfo({
-            success:(result:SystemInfo)=>{
-                const width1 = result.windowWidth-30;
-                const scale1 = width1/imgWidth;
-                const height1 = imgHeight*scale1;
-                setWidth(width1);
-                setHeight(height1);
-                request("level?id=37",(data)=>{
-                    const {value,question=[]} = data;
-                    setLevel(value);
-                    setImgs(question.map((item:ImageData,index:number)=>{
-                        if(index===0){
-                           return item;
-                        }
-                        return {
-                            ...item,
-                            width:item.width*scale1,
-                            height:item.height*scale1,
-                            x:item.x*scale1-item.width*scale1/2,
-                            y:Math.abs(item.y*scale1-item.height*scale1/2),
-                        }
-                    }));
-                    setRemainSeconds(100);
-                });
-            }
-        });
+
+        console.log(getStorage("systemInfo"),"111111111111111111111");
+
+        wxGetSystemInfo((result:SystemInfo)=>{
+            const width1 = result.windowWidth-30;
+            const scale1 = width1/imgWidth;
+            const height1 = imgHeight*scale1;
+            setWidth(width1);
+            setHeight(height1);
+            request("level",(data)=>{
+                console.log("game",data);
+                const {value,question=[]} = data;
+                setLevel(value);
+                setImgs(question.map((item:ImageData,index:number)=>{
+                    if(index===0){
+                        return item;
+                    }
+                    return {
+                        ...item,
+                        width:item.width*scale1,
+                        height:item.height*scale1,
+                        x:item.x*scale1-item.width*scale1/2,
+                        y:Math.abs(item.y*scale1-item.height*scale1/2),
+                    }
+                }));
+                setRemainSeconds(100);
+            },{
+                data:{
+                    id:37
+                }
+            });
+        })
         countDown(remainSeconds);
     });
     const countDown=(seconds:number)=>{

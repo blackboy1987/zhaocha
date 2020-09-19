@@ -21,6 +21,15 @@ const request = (url:string,callback:(data:any)=>void,options?:any)=>{
     const method = options.method || 'GET';
     const data = options.data || {};
     const userToken = getStorage("userToken");
+    let header:{[key:string]:string} = {
+        'content-type': 'application/json'
+    };
+    if (method==='POST'){
+        header= {
+            ...header,
+            "content-type": "application/x-www-form-urlencoded",
+        }
+    }
     wx.request({
         url: Constants.baseUrl+url,
         method,
@@ -30,9 +39,10 @@ const request = (url:string,callback:(data:any)=>void,options?:any)=>{
             userToken,
             ...data,
         },
+        header,
         success (res) {
             const {statusCode} = res;
-            console.log(statusCode);
+            console.log(url,statusCode);
             if(statusCode>=200&&statusCode<=299){
                 callback(res.data.data);
             }else {

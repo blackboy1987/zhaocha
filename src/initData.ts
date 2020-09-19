@@ -1,6 +1,8 @@
-export const siteInfo = {
-    "ticket_max":7,
-    "ticket_time":600,
+import {SiteInfo} from "@/data";
+
+export const defaultSiteInfo:SiteInfo = {
+    ticketMax:7,
+    ticketTime:600,
     "is_share":0,
     "game_time":100,
     "down_time":20,
@@ -169,9 +171,9 @@ export const siteInfo = {
     "yf_show_image":""
 }
 
-const defaultLevelInfo = {
+export const defaultLevelInfo = {
     "status": 1,
-    "residue_time": 0,
+    "residue_time": 550,
     "ticket": "7",
     "money": "1",
     "gold": "0",
@@ -185,7 +187,7 @@ const defaultLevelInfo = {
     "help_flag": 1
 }
 
-const defaultUserInfo = {
+export const defaultUserInfo = {
     "openid": "o_Ugf5XDy8gE4bN4-U4Kt03ngKLI",
     "nickname": "一枚帅哥",
     "avatarurl": "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIzic1qjbhDJ3ia494IWj3yaVLysEKOmS42Hvle1bByCKribFY7mUBzJibFB1LblQxVaQ8ktWaGBYibaVg/132",
@@ -217,6 +219,8 @@ export const defaultRankInfo = {
     money: 0,
     rankName: '',
     rank: 1,
+    residueTime:500,
     rankImg: '',
-    willTitle: ''
+    willTitle: '',
+
 }

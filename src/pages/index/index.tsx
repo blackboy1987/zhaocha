@@ -15,8 +15,9 @@ import SettingModal from "@/pages/components/SettingModal";
 import GiftModal from "@/pages/components/GiftModal";
 import BannerAd from "../components/Ad/BannerAd";
 import {getStorage, login, setStorage} from "@/util/wxUtils";
-import {RankInfo} from "@/data";
-import {defaultRankInfo} from "@/initData";
+import {RankInfo, SiteInfo, UserInfo} from "@/data";
+import {defaultRankInfo, defaultSiteInfo, defaultUserInfo} from "@/initData";
+import DuiHuanModal from "@/pages/components/DuiHuanModal";
 
 
 export default () => {
@@ -26,10 +27,14 @@ export default () => {
     const [rankModalVisible, setRankModalVisible] = useState<boolean>(false);
     const [giftModalVisible, setGiftModalVisible] = useState<boolean>(false);
     const [settingModalVisible, setSettingModalVisible] = useState<boolean>(false);
+    const [duiHuanModalVisible,setDuiHuanModalVisible] = useState<boolean>(false);
     const [rankData, setRankData] = useState<RankData[]>([]);
     const [countDownTime,setCountDownTime] = useState<number>(100);
     const [animation,setAnimation] = useState<any>(null);
     const [rankInfo,setRankInfo] = useState<RankInfo>(defaultRankInfo);
+    const [siteInfo,setSiteInfo] = useState<SiteInfo>(defaultSiteInfo);
+    const [userInfo,setUserInfo] = useState<UserInfo>(defaultUserInfo);
+    const [rewards,setRewards] = useState([]);
 
     useNativeEffect(() => {
         setIsAuth(wx.getStorageSync("isAuth"));
@@ -47,8 +52,11 @@ export default () => {
 
 
     usePageEvent("onLoad",(e)=>{
+        setSiteInfo(getStorage("siteInfo"));
        // 调用登录接口获取用户信息
-        login();
+        login((res)=>{
+            setUserInfo(res);
+        });
         // 获取用户等级信息
         request("user/level?userToken="+getStorage("userToken"),(data)=>{
             setRankInfo(getStorage("rankInfo"));
@@ -111,15 +119,26 @@ export default () => {
     }
 
     const goRewards=()=>{
-
+        const {money=0} = userInfo;
+        const {reward:{max_unit=0,msg}} = siteInfo;
+        if(money<max_unit){
+            wx.showToast({
+                title: msg,
+                icon: "none",
+                duration: 2e3
+            })
+        }else{
+            // 拉取可以兑换的礼品
+            setDuiHuanModalVisible(true);
+        }
     }
   return (
     <View className={styles.app} style={{background:'#fbd3a4'}}>
       <View className={styles.top}>
           <View className={styles.power} onTap={checkEng}>
               <Image className={styles.powerImg} src="/images/power.png" />
-              <Text className={styles.powerTxt}>5/7</Text>
-              <Text className={styles.currTime}>{formatTime(countDownTime)}</Text>
+              <Text className={styles.powerTxt}>{userInfo.ticket}/{siteInfo.ticketMax}</Text>
+              <Text className={styles.currTime}>{formatTime(rankInfo.residueTime||0)}</Text>
           </View>
           <View className={styles.coin}>
               <Image className={styles.powerImg} src="/images/coin.png" />
@@ -171,10 +190,14 @@ export default () => {
                     <Image className={styles.btnImg} src={Constants.resourceUrl+'images/people.png'} />
                 </Button>
             </View>
-            <View onTap={goRewards} className={styles.rewards}>
-                <Image src={`${Constants.resourceUrl}images/s1DD3FW1W3tjbBZzDBWbK77fgbTss3.jpg`} />
-                <view>1元</view>
-            </View>
+            {
+                siteInfo.reward?.open==1 ? (
+                    <View onTap={goRewards} className={styles.rewards}>
+                        <Image src={siteInfo.reward.img} />
+                        <view>{userInfo.money} {siteInfo.reward.unit}</view>
+                    </View>
+                ) : null
+            }
             <BannerAd />
         </View>
         {
@@ -189,6 +212,10 @@ export default () => {
         {
             settingModalVisible ? (<SettingModal visible={settingModalVisible} close={()=>setSettingModalVisible(false)} rankData={rankData} />) : null
         }
+        {
+            duiHuanModalVisible ? (<DuiHuanModal visible close={()=>setDuiHuanModalVisible(false)} />) : null
+        }
+
     </View>
   );
 };
